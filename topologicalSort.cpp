@@ -30,6 +30,29 @@ void topologicalSort(vector<vector<int>> &g,int n){//O(v+e)
         }
     }
 }
+void topologicalSortUsingDFSUtils(vector<vector<int>> &g,int n,stack<int> &s,vector<bool> &visited,int u){
+    visited[u]=true;
+    for(auto it=g[u].begin();it!=g[u].end();it++){
+        if(visited[*it]==false){
+            topologicalSortUsingDFSUtils(g,n,s,visited,*it);
+        }
+    }
+    s.push(u);
+}
+void topologicalSortUsingDFS(vector<vector<int>> &g,int n){
+    stack<int> s;
+    vector<bool> visited;
+    visited.assign(n,false);
+    for(int u=0;u<n;u++){
+        if(visited[u]==false){
+            topologicalSortUsingDFSUtils(g,n,s,visited,u);
+        }
+    }
+    while(!s.empty()){
+        cout<<s.top()<<"->";
+        s.pop();
+    }
+}
 int main() {
     int n,e;
     cin>>n>>e;
@@ -43,4 +66,6 @@ int main() {
         g[u].push_back(v);
     }
     topologicalSort(g,n);
+    cout<<endl;
+    topologicalSortUsingDFS(g,n);
 }
