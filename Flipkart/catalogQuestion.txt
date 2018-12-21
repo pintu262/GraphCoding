@@ -1,0 +1,6 @@
+Question.
+Suppose in flipkart all the catalog hirarchy is implemented as tree. You need to send this catalog to client and sometimes update some node information. How will you send this information to client about the catalog and update its client about the 
+change in the node name.
+Answer:
+Each link in the catalog represent an edge in the tree. If we send the json to client, then we can send edge information. And in client side we need a logic to build the tree(catalog) by gettig this information. 
+If we want to change the catalog info, just send another json about the update of the node info.
